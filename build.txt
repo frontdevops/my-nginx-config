@@ -1,0 +1,28 @@
+# wget "http://downloads.sourceforge.net/project/pcre/pcre/8.36/pcre-8.36.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fpcre%2Ffiles%2Fpcre%2F8.36%2F&ts=1419948588&use_mirror=heanet" -O pcre-8.36.zip
+# wget "http://downloads.sourceforge.net/project/libpng/zlib/1.2.8/zlib-1.2.8.tar.gz?r=http%3A%2F%2Fwww.zlib.net%2F&ts=1419948641&use_mirror=heanet" -O zlib-1.2.8.tar.gz
+# http://wiki.nginx.org/HttpLuaModule
+
+export LUAJIT_LIB=/root/libs/lua/luajit-2.0.3/
+export LUAJIT_INC=/root/libs/lua/luajit-2.0.3/src
+
+./configure \
+	--sbin-path=/usr/sbin/nginx \
+	--conf-path=/etc/nginx/nginx.conf \
+	--pid-path=/var/run/nginx.pid \
+	--lock-path=/var/run/nginx.lock \
+	--error-log-path=/var/log/nginx/error.log \
+	--http-log-path=/var/log/nginx/access.log \
+	--user=www \
+	--group=www \
+	--with-ipv6 \
+	--with-zlib=/root/libs/zlib/zlib-1.2.8 \
+	--with-pcre=/root/libs/pcre/pcre-8.36 \
+	--with-pcre-jit \
+	--with-http_gzip_static_module \
+	--with-http_ssl_module \
+	--with-http_spdy_module \
+	--add-module=/root/nginx/ndk \
+	--add-module=/root/nginx/libs/lua-nginx-module \
+
+make -j2
+make install
