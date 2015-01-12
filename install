@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cp -vr etc/nginx /etc/nginx
+
+
+#EOF#
