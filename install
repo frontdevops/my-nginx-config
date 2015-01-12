@@ -1,6 +1,33 @@
 #!/bin/bash
 
+set -o nounset
+set -o errexit
+
 cp -vr etc/nginx /etc/nginx
 
+cd ~/nginx
+nginx=nginx-1.7.9.tar.gz
+wget "http://nginx.org/download/$nginx"
+tar -zxvf $nginx
+rm -vf $nginx
+
+cd
+mkdir libs
+cd libs
+
+pcre=pcre-8.36.zip
+zlib=zlib-1.2.8.tar.gz
+wget "http://downloads.sourceforge.net/project/pcre/pcre/8.36/pcre-8.36.zip?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fpcre%2Ffiles%2Fpcre%2F8.36%2F&ts=1419948588&use_mirror=heanet" -O $pcre
+wget "http://downloads.sourceforge.net/project/libpng/zlib/1.2.8/zlib-1.2.8.tar.gz?r=http%3A%2F%2Fwww.zlib.net%2F&ts=1419948641&use_mirror=heanet" -O $zlib
+
+unzip $pcre
+tar -zxvf $zlib
+
+rm -vf $zlib
+rm -vf $pcre
+
+cd ~/nginx/my-nginx-config/
+cp -v build.txt ~/nginx/b.txt
+#mcedit b.txt
 
 #EOF#
