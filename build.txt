@@ -4,26 +4,33 @@
 # apt-get install libssl-dev
 # apt-get install lua *
 
-export LUAJIT_LIB=/root/libs/lua/luajit-2.0.3
-export LUAJIT_INC=/root/libs/lua/luajit-2.0.3/src
+#export LUAJIT_LIB=/root/libs/lua/luajit-2.0.3
+#export LUAJIT_INC=/root/libs/lua/luajit-2.0.3/src
 
 ./configure \
-	--sbin-path=/usr/sbin/nginx \
-	--conf-path=/etc/nginx/nginx.conf \
-	--pid-path=/var/run/nginx.pid \
-	--lock-path=/var/run/nginx.lock \
-	--error-log-path=/var/log/nginx/error.log \
-	--http-log-path=/var/log/nginx/access.log \
-	--user=www \
-	--group=www \
-	--with-ipv6 \
-	--with-zlib=/root/libs/zlib-1.2.8 \
-	--with-pcre=/root/libs/pcre-8.36 \
-	--with-pcre-jit \
-	--with-http_gzip_static_module \
-	--with-http_ssl_module \
-	--with-http_spdy_module \
-	--add-module=/root/nginx/libs/ndk \
-	--add-module=/root/nginx/libs/lua/lua-nginx-module \
+        --sbin-path=/usr/sbin/nginx \
+        --conf-path=/etc/nginx/nginx.conf \
+        --pid-path=/var/run/nginx.pid \
+        --lock-path=/var/run/nginx.lock \
+        --error-log-path=/var/log/nginx/error.log \
+        --http-log-path=/var/log/nginx/access.log \
+        --user=www \
+        --group=www \
+        --with-ipv6 \
+        --with-pcre-jit \
+        --with-http_gzip_static_module \
+        --with-http_ssl_module \
+        --with-openssl=../../openssl-1.0.2g \
+        --with-http_v2_module \
+        --with-http_image_filter_module \
+        --with-debug \
+#       --add-module=../njs/nginx \
+#       --with-zlib=/root/libs/zlib-1.2.8 \
+#       --with-pcre=/root/libs/pcre2-10.20 \
+#       --with-http_spdy_module \
+#       --add-module=/root/nginx/libs/ndk \
+#       --add-module=/root/nginx/libs/lua/lua-nginx-module \
+#       --with-cc-opt='-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic' \
 
-make -j2 && make install
+make && make install
+#make -j2 && checkinstall
